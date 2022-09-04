@@ -1,0 +1,47 @@
+:root{
+    --primery-color:#343434;
+    --secondary-color:#414141;
+    --red-pink:#d34638;
+    --white-color:#eeeeee;
+}
+
+@media only screen and (max-width:700px){
+    #side_bar{
+        position: absolute;
+        bottom: -10%;
+        height: 0;
+        transition: .5s;
+        overflow: auto;
+    }
+    #side_bar.active{
+        bottom:0;
+        min-height: 60%;
+        max-height: 100%;
+        width: 100%;
+        background-color: var(--white-color);
+        z-index: 10000;
+    }
+    #map{
+        grid-area:2/1/-1/-1;
+        border-radius: 0;
+    }
+    #fotter{
+        position: absolute;
+        bottom: -10%;
+        height: 0;
+        overflow: hidden;
+    }
+    .logo img{
+        height: 50px;
+    }
+    .buttons .btn{
+        padding: 5px 8px;
+        font-size: .6rem;
+    }
+    #app{
+        grid-gap: 0;
+    }
+    #nav{
+        padding: 0 5px;
+    }
+}

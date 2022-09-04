@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo+2:wght@300;400;500&family=Orbitron:wght@400;500;600&family=Rajdhani:wght@300;400&display=swap");
+/* 
+font-family: 'Bebas Neue', cursive;
+font-family: 'Exo 2', sans-serif;
+font-family: 'Orbitron', sans-serif;
+font-family: 'Rajdhani', sans-serif;
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 18px;
+  font-family: "Orbitron", sans-serif;
+}
+:root{
+    --primery-color:#343434;
+    --secondary-color:#414141;
+    --red-pink:#d34638;
+    --white-color:#eeeeee;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--primery-color);
+}
+#app{
+    width: 100%;
+    height: 97%;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: 8% 77% 15%;
+    gap: .5rem;
+}
+.section{
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 5px 5px 50px 10px rgb(24, 24, 24);
+    color: var(--red-pink);
+    font-weight: 600;
+}
+#nav{
+    border-radius:0 0 8px 8px;
+    grid-area:1/1/2/-1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px 0 10px;
+}
+#side_bar{
+    grid-area:2/1/-1/2;
+    display: grid;
+    place-items: center;
+    padding: .8rem;
+
+}
+#map{
+    grid-area:2/2/3/-1;
+}
+#fotter{
+    grid-area:3/2/-1/-1;
+    display: grid;
+    place-items: center;
+    padding: .8rem;
+}
+.buttons .btn{
+    border: none;
+    padding: 7px 13px;
+    border-radius: 5px;
+    font-size: .8rem;
+    font-family: "Orbitron", sans-serif;
+    background-color: var(--red-pink);
+    color: var(--white-color);
+    letter-spacing: 3px;
+}
+.btn:hover{
+    opacity: .8;
+    cursor: pointer;
+}
