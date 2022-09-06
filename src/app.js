@@ -22,12 +22,14 @@ class App {
           className: "location",
           maxWidth: 250,
           minWidth: 200,
-        }).setContent("you are here")
+        }).setContent("You are within 6.4705 meters from this point")
       );
     this.#map.on("click", this._showDetails.bind(this));
+    L.Control.geocoder().addTo(this.#map);
   }
   async _locateUsingIp(){
     let res = await fetch("https://ipapi.co/json/");
+    // let res = await fetch("https://api.bigdatacloud.net/data/ip-geolocation?key=bdc_aee86d43bdd846afa5d0b23096b40b58");
     let location = await res.json();
     console.log(location);
     const  latitude  = location.latitude
@@ -44,14 +46,14 @@ class App {
           className: "location",
           maxWidth: 250,
           minWidth: 200,
-        }).setContent("you are here")
+        }).setContent("You are within 100km from this point. give location permission to get accurate location?")
       );
     this.#map.on("click", this._showDetails.bind(this));
+    L.Control.geocoder().addTo(this.#map);
   }
   _showDetails(e) {
     const detailsElm = document.querySelector("#side_bar");
     detailsElm.classList.toggle("active");
-    console.log(e);
   }
 }
 const app = new App();
