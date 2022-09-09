@@ -1,41 +1,52 @@
-:root{
-    --primery-color:#343434;
-    --secondary-color:#414141;
-    --red-pink:#d34638;
-    --white-color:#eeeeee;
+:root {
+  --primery-color: #343434;
+  --secondary-color: #414141;
+  --red-pink: #d34638;
+  --white-color: #eeeeee;
 }
 
-@media only screen and (max-width:700px){
-    #side_bar{
-        position: absolute;
-        bottom: -10%;
-        height: 0;
-        transition: .5s;
-        overflow: auto;
-    }
-    #side_bar.active{
-        bottom:0;
-        min-height: 60%;
-        max-height: 100%;
-        width: 100%;
-        background-color: var(--white-color);
-        z-index: 10000;
-    }
-    #map{
-        grid-area:2/1/-1/-1;
-        border-radius: 0;
-    }
-    .logo img{
-        height: 50px;
-    }
-    .buttons .btn{
-        padding: 5px 8px;
-        font-size: .6rem;
-    }
-    #app{
-        grid-gap: 0;
-    }
-    #nav{
-        padding: 0 5px;
-    }
+@media only screen and (min-width: 750px) {
+  .leaflet-touch .leaflet-control-geocoder {
+    position: fixed;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .leaflet-control-geocoder-form input {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  #side_bar {
+    position: absolute;
+    bottom: -10%;
+    height: 0;
+    transition: 0.5s;
+    overflow: auto;
+  }
+  #side_bar.active {
+    bottom: 0;
+    min-height: 60%;
+    max-height: 100%;
+    width: 100%;
+    background-color: var(--white-color);
+    z-index: 100000;
+  }
+  #map {
+    grid-area: 2/1/-1/-1;
+    border-radius: 0;
+  }
+  .logo img {
+    height: 50px;
+  }
+  .buttons .btn {
+    padding: 5px 8px;
+    font-size: 0.6rem;
+  }
+  #app {
+    grid-gap: 0;
+  }
+  #nav {
+    padding: 0 5px;
+  }
 }

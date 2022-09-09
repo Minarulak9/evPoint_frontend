@@ -1,9 +1,38 @@
+const searchClr = document.querySelector(".clear-search");
+const searchClrBtn = searchClr.querySelector("button");
+const locateMeBtn = document.querySelector(".locate button");
+let searchInput;
+
+const screen = window.screen.availWidth;
+const isPc = screen <= 750;
 class App {
   #map;
   #search;
   #evs;
+  #cordinates;
   constructor() {
     this._getPosition();
+    this._getCordinates.bind(this)();
+    // listners
+    locateMeBtn.addEventListener("click", () => {
+      console.log(this.#cordinates);
+      this.#map.flyTo(this.#cordinates, 12, { duration: 1.2 });
+    });
+    searchClrBtn.addEventListener("click", () => {
+      this.#search?.remove();
+      searchClr.classList.add("hide");
+      searchInput.value = "";
+    });
+  }
+  _getCordinates() {
+    navigator.geolocation.getCurrentPosition(
+      (coords) => {
+        this.#cordinates = [coords.coords.latitude, coords.coords.longitude];
+      },
+      () => {
+        this.#cordinates = [22.941529740717435, 88.34692052708166];
+      }
+    );
   }
   _getPosition() {
     navigator.geolocation.getCurrentPosition(
@@ -31,6 +60,7 @@ class App {
     this.#map.on("click", this._showDetails.bind(this));
     var geocoder = L.Control.geocoder({
       defaultMarkGeocode: false,
+      collapsed: isPc,
     })
       .on("markgeocode", this._markSearch.bind(this))
       .addTo(this.#map);
@@ -59,7 +89,15 @@ class App {
       bbox.getNorthWest(),
       bbox.getSouthWest(),
     ]).addTo(this.#map);
-    this.#map.fitBounds(this.#search.getBounds());
+    // this.#map.fitBounds(this.#search.getBounds());
+    let zoom = this.#map.getBoundsZoom(this.#search.getBounds());
+    this.#map.flyTo(this.#search.getCenter(), zoom, {
+      duration: 1.2,
+    });
+    searchInput = document.querySelector(
+      ".leaflet-control-geocoder-form input"
+    );
+    document.querySelector(".clear-search").classList.remove("hide");
   }
   markEvs(coords) {
     console.log(this);
@@ -76,6 +114,9 @@ class App {
           }).setContent("ev station")
         );
     });
+  }
+  locateme() {
+    console.log(this);
   }
 }
 const app = new App();

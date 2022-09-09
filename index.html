@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     <!--================ leaflet ==================-->
-
     <link rel="shortcut icon" href="./img/logo_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="./src/style.css">
     <link rel="stylesheet" href="./src/media.css">
@@ -24,6 +23,8 @@
 </head>
 
 <body>
+    <div class="clear-search btn-nf hide"><button>clear search</button></div>
+    <div class="locate btn-nf"><button><img src="./img/icon/location.png" width="30px" alt=""></button></div>
     <div id="app">
         <div id="nav" class="section">
             <div class="logo">
@@ -35,7 +36,49 @@
             </div>
         </div>
         <div id="side_bar" class="section">
-            Details here
+            <div class="buttons">
+                <button class="btn">Charging</button>
+                <button class="btn">Garages</button>
+            </div>
+            <div class="nearest_points ">
+                <ul class="points ">
+                    <li class="point">
+                        <div class="name">FX chargin station</div>
+                        <div class="capacity">tottal <span class="tottal">50</span> available <span class="aval">30</span></div>
+                        <div class="state open">Open</div>
+                        <div class="closing_time">closing time <span class="time">11pm</span></div>
+                        <div class="distance">Distance <span class="km">15km</span></div>
+                        <div class="location">Kolkata, west bengal</div>
+                        <div class="options"><span class="two"><img width="25px" src="./img/bycicle.png" alt=""> </span><span class="four"><img height="25px" src="./img/electric-car.png" alt=""></span></div>
+                    </li>
+                    <li class="point">
+                        <div class="name">FX chargin station</div>
+                        <div class="capacity">tottal <span class="tottal">50</span> available <span class="aval">30</span></div>
+                        <div class="state open">Open</div>
+                        <div class="closing_time">closing time <span class="time">11pm</span></div>
+                        <div class="distance">Distance <span class="km">15km</span></div>
+                        <div class="location">Kolkata, west bengal</div>
+                        <div class="options"><span class="two"><img width="25px" src="./img/bycicle.png" alt=""> </span><span class="four"><img height="25px" src="./img/electric-car.png" alt=""></span></div>
+                    </li>
+                    <li class="point">
+                        <div class="name">FX chargin station</div>
+                        <div class="capacity">tottal <span class="tottal">50</span> available <span class="aval">30</span></div>
+                        <div class="state open">Open</div>
+                        <div class="closing_time">closing time <span class="time">11pm</span></div>
+                        <div class="distance">Distance <span class="km">15km</span></div>
+                        <div class="location">Kolkata, west bengal</div>
+                        <div class="options"><span class="two"><img width="25px" src="./img/bycicle.png" alt=""> </span><span class="four"><img height="25px" src="./img/electric-car.png" alt=""></span></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="details hide">
+                <div class="image"><img src="./img/logo.png" alt=""></div>
+                <div class="alldetails">
+                    <ul class="details_list">
+                        <li class="name">HX Charging station</li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div id="map" class="section"></div>
     </div>

@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo+2:wght@300;400;500&family=Orbitron:wght@400;500;600&family=Rajdhani:wght@300;400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
 /* 
 font-family: 'Bebas Neue', cursive;
 font-family: 'Exo 2', sans-serif;
 font-family: 'Orbitron', sans-serif;
 font-family: 'Rajdhani', sans-serif;
+font-family: 'Poppins', sans-serif;
 */
 * {
   margin: 0;
@@ -51,10 +53,11 @@ body{
 }
 #side_bar{
     grid-area:2/1/-1/2;
-    display: grid;
-    place-items: center;
     padding: .8rem;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
 }
 #map{
     grid-area:2/2/-1/-1;
@@ -72,4 +75,123 @@ body{
 .btn:hover{
     opacity: .8;
     cursor: pointer;
+}
+.btn-nf{
+    position: absolute;
+    bottom: 0;
+    right: 30px;
+    z-index: 100000;
+    box-shadow: 0 0 10px 2px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.btn-nf button{
+    border-radius: 5px;
+    font-family: "Orbitron", sans-serif;
+}
+.btn-nf button:hover{
+    opacity: .8;
+    cursor: pointer;
+}
+.clear-search {
+    bottom: 40px;
+}
+.clear-search.hide{
+    display: none;
+}
+.locate{
+    bottom: 90px;
+}
+.locate button{
+    background-color: rgb(255, 255, 255);
+    outline: none;
+    padding: 6px;
+}
+.clear-search button{
+    font-size: .8rem;
+    padding: 10px;
+}
+#side_bar .nearest_points.hide{
+    display: none;
+}
+#side_bar .details.hide{
+    display: none;
+}
+#side_bar .buttons{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    justify-content: space-around;
+    border-bottom: 2px solid white;
+}
+#side_bar .buttons .btn{
+    flex: 1;
+}
+#side_bar .nearest_points{
+    width: 100%;
+    height: 90%;
+}
+#side_bar .nearest_points .points{
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    overflow: auto;
+}
+.points::-webkit-scrollbar{
+    width: 0px;
+}
+#side_bar .nearest_points .points .point:hover{
+    background-color: #ddfdff;
+    cursor: pointer;
+}
+#side_bar .nearest_points .points .point{
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    padding: 9px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 30px -10px rgb(51, 51, 51);
+    font-family: 'Rajdhani', sans-serif;
+    color: black;
+    display: grid;
+    grid-template-rows:3fr repeat(3,2fr);
+    grid-template-columns: 60% 40%;
+    gap: 5px;
+    font-weight: 500;
+    transition: .5s;
+}
+.point .name{
+    font-weight: 600;
+    color: rgb(41, 41, 41);
+    grid-area: 1/1/2/-1;
+    font-size: 1.2rem;
+    background-color: transparent !important;
+    text-align: left !important;
+    box-shadow: none !important;
+}
+
+.point > div{
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 4px;
+    width: fit-content;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    align-self: center;
+}
+.point .state{
+    padding: 2px 10px;
+    width: fit-content;
+    box-shadow: 5px 5px 20px -10px;
+}
+.point .state.open{
+    background-color: rgb(0, 235, 145);
+}
+.point .state.close{
+    background-color: rgb(241, 205, 0);
 }
