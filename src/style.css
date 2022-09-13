@@ -195,3 +195,39 @@ body{
 .point .state.close{
     background-color: rgb(241, 205, 0);
 }
+
+
+
+/* leaflet popup */
+.leaflet-popup-content{
+    width: 200px;
+}
+.p-name{
+    font-size: 1rem;
+}
+.p-head{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.p-btns{
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.p-btn{
+    border: none;
+    outline: none;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: .8rem;
+    box-shadow: 5px 5px 20px -10px;
+}
+.p-direction_btn{
+    background-color: #7a160d;
+}
+.p-details_btn{
+    background-color: rgb(0, 149, 168);
+}

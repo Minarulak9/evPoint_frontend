@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "name": "fronend",
+  "description": "<h2><a href=\"https://minarulak9.github.io/evPoint_frontend/\">Live view</a><h2>",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Minarulak9/evPoint_frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Minarulak9/evPoint_frontend/issues"
+  },
+  "homepage": "https://github.com/Minarulak9/evPoint_frontend#readme"
+}

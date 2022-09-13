@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>evPoint</title>
+    <!-- axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!----------------- leaflet ------------------>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
         integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
@@ -15,6 +17,9 @@
         crossorigin=""></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <link rel="stylesheet" href="./src/leaflet-routing-machine.css" />
+    <script src="./src/leaflet-routing-machine.js"></script>
     <!--================ leaflet ==================-->
     <link rel="shortcut icon" href="./img/logo_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="./src/style.css">
@@ -42,7 +47,7 @@
             </div>
             <div class="nearest_points ">
                 <ul class="points ">
-                    <li class="point">
+                    <!-- <li class="point">
                         <div class="name">FX chargin station</div>
                         <div class="capacity">tottal <span class="tottal">50</span> available <span class="aval">30</span></div>
                         <div class="state open">Open</div>
@@ -68,7 +73,7 @@
                         <div class="distance">Distance <span class="km">15km</span></div>
                         <div class="location">Kolkata, west bengal</div>
                         <div class="options"><span class="two"><img width="25px" src="./img/bycicle.png" alt=""> </span><span class="four"><img height="25px" src="./img/electric-car.png" alt=""></span></div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="details hide">
