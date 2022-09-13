@@ -126,8 +126,9 @@ class App {
     console.log(this.#cordinates);
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/points/evs/nearest/${lng}/${lat}`
+        `https://evpoint.herokuapp.com/points/evs/nearest/${lng}/${lat}`
       );
+      console.log(response);
       this._genarateList.bind(this)(response.data.points);
     } catch (error) {
       console.log(error);
