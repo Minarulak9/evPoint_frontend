@@ -34,6 +34,7 @@ class App {
     navigator.geolocation.getCurrentPosition(
       (coords) => {
         this.#cordinates = [coords.coords.latitude, coords.coords.longitude];
+        this._getNearestPoints.bind(this)();
       },
       () => {
         this.#cordinates = [22.941529740717435, 88.34692052708166];
@@ -119,8 +120,18 @@ class App {
         );
     });
   }
-  locateme() {
-    console.log(this);
+  async _getNearestPoints() {
+    let lat = this.#cordinates[1];
+    let lng = this.#cordinates[0];
+    console.log(this.#cordinates);
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:3000/points/evs/nearest/${lng}/${lat}`
+      );
+      this._genarateList.bind(this)(response.data.points);
+    } catch (error) {
+      console.log(error);
+    }
   }
   async _getPoints() {
     try {
@@ -128,21 +139,23 @@ class App {
         "https://evpoint.herokuapp.com/points/evs"
       );
       this.#points = response.data.points;
-      if (response.data.points.length > 5) {
-        let nearest = response.data.points.slice(0, 5);
-        this._genarateList(nearest);
-      } else {
-        this._genarateList(response.data.points);
-      }
       let evIcon = L.icon({
         iconUrl: "./img/charging.png",
         iconSize: [50, 50],
         className: "ev_icon",
       });
+      let gIcon = L.icon({
+        iconUrl: "./img/garagepoint.png",
+        iconSize: [40, 40],
+        className: "ev_icon",
+      });
       this.#pointsLayer = L.geoJSON(response.data.points, {
         onEachFeature: this._onEachFeature.bind(this),
         pointToLayer: function (point, latlng) {
-          return L.marker(latlng, { icon: evIcon });
+          console.log(point);
+          return L.marker(latlng, {
+            icon: point.properties.pointType == "ev" ? evIcon : gIcon,
+          });
         },
       }).on("click", this._makeDirection.bind(this));
       this.#pointsLayer.addTo(this.#map);
@@ -181,7 +194,7 @@ class App {
         point.properties.wheller.four == true ? "./img/electric-car.png" : ""
       }" alt=""></span></div>
                     </li>`;
-      pointsContainer.insertAdjacentHTML("afterbegin", html);
+      pointsContainer.insertAdjacentHTML("beforeend", html);
     });
   }
   _onEachFeature(point, layer) {
@@ -191,7 +204,11 @@ class App {
     return `
       <div class="p-head">
       <div class="p-name">${point.properties.supplierName}</div>
-      <div class="p-logo"><img src="./img/charging-station.png" height="30px"></div>
+      <div class="p-logo"><img src="./img/${
+        point.properties.pointType == "ev"
+          ? "charging-station.png"
+          : "spare-parts.png"
+      }" height="30px"></div>
       </div>
       <div class="p-aval">Available port: ${
         point.properties.availablePort
