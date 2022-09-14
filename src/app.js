@@ -29,17 +29,24 @@ class App {
       searchClr.classList.add("hide");
       searchInput.value = "";
     });
-    this._getPoints.bind(this)();
   }
   _getCordinates() {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
     navigator.geolocation.getCurrentPosition(
       (coords) => {
+        console.log("CO-ORDINATES:", coords);
         this.#cordinates = [coords.coords.latitude, coords.coords.longitude];
         this._getNearestPoints.bind(this)();
       },
       () => {
         this.#cordinates = [22.941529740717435, 88.34692052708166];
-      }
+        this._getNearestPoints.bind(this)();
+      },
+      options
     );
   }
   _getPosition() {
@@ -73,6 +80,12 @@ class App {
     })
       .on("markgeocode", this._markSearch.bind(this))
       .addTo(this.#map);
+
+
+    // @NOTE This is not the right way to put this call here
+    // but for now it's a quick and dirty work to fix the issue
+    // of not showing EV and Garage marker every time on the map
+    this._getPoints.bind(this)();
   }
   async _locateUsingIp() {
     let res = await fetch("https://ipapi.co/json/");
@@ -237,7 +250,7 @@ class App {
       <div class="p-phone">Phone: <a href="tel:${point.properties.phone}">${
       point.properties.phone
     }</a> </div>
-      <div class="p-distance">Distance:${"20km"}</div>
+      <div class="p-distance">Distance: ...</div>
       <div class="p-btns">
       <button class="p-details_btn p-btn">Deatils</button>
       <button class="p-direction_btn p-btn">Get direction</button>
@@ -253,7 +266,21 @@ class App {
         L.latLng(coords.latlng.lat, coords.latlng.lng),
       ],
     });
+    this.#routingLayer.on("routesfound", (e) => {
+      const route = e.routes[0].summary;
+      console.log(route);
+      document.querySelector('.p-distance').innerHTML = `Distance: ${this.convertMeterToKiloMeter(route.totalDistance)} Km, ${this.convertSecToMin(route.totalTime)} min(s)`;
+    });
+
     this.#routingLayer.addTo(this.#map);
+  }
+
+  convertMeterToKiloMeter(distance) {
+    return Math.round(distance / 1000 * 100) / 100;
+  }
+
+  convertSecToMin(seconds) {
+    return Math.round(seconds % 3600 / 60);
   }
 }
 const app = new App();
