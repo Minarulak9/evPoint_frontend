@@ -39,6 +39,7 @@ class App {
       },
       () => {
         this.#cordinates = [22.941529740717435, 88.34692052708166];
+        this._getNearestPoints.bind(this)();
       }
     );
   }
