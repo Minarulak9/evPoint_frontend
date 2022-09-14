@@ -31,15 +31,22 @@ class App {
     });
   }
   _getCordinates() {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
     navigator.geolocation.getCurrentPosition(
       (coords) => {
+        console.log("CO-ORDINATES:", coords);
         this.#cordinates = [coords.coords.latitude, coords.coords.longitude];
         this._getNearestPoints.bind(this)();
       },
       () => {
         this.#cordinates = [22.941529740717435, 88.34692052708166];
         this._getNearestPoints.bind(this)();
-      }
+      },
+      options
     );
   }
   _getPosition() {
