@@ -29,7 +29,6 @@ class App {
       searchClr.classList.add("hide");
       searchInput.value = "";
     });
-    this._getPoints.bind(this)();
   }
   _getCordinates() {
     navigator.geolocation.getCurrentPosition(
@@ -74,6 +73,12 @@ class App {
     })
       .on("markgeocode", this._markSearch.bind(this))
       .addTo(this.#map);
+
+
+    // @NOTE This is not the right way to put this call here
+    // but for now it's a quick and dirty work to fix the issue
+    // of not showing EV and Garage marker every time on the map
+    this._getPoints.bind(this)();
   }
   async _locateUsingIp() {
     let res = await fetch("https://ipapi.co/json/");
