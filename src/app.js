@@ -2,6 +2,7 @@ const searchClr = document.querySelector(".clear-search");
 const searchClrBtn = searchClr.querySelector("button");
 const locateMeBtn = document.querySelector(".locate button");
 const pointsContainer = document.querySelector(".points");
+
 let getDirectionBtn;
 let searchInput;
 
@@ -153,7 +154,6 @@ class App {
       this.#pointsLayer = L.geoJSON(response.data.points, {
         onEachFeature: this._onEachFeature.bind(this),
         pointToLayer: function (point, latlng) {
-          console.log(point);
           return L.marker(latlng, {
             icon: point.properties.pointType == "ev" ? evIcon : gIcon,
           });
@@ -166,24 +166,43 @@ class App {
   }
   _genarateList(arr) {
     arr.forEach((point) => {
-      const html = `<li class="point">
+      let serviceText =
+        point.properties.open24x7 == true
+          ? "24x7 service"
+          : `opening : ${point.properties.openTime} <br> closing: ${point.properties.closingTime} `;
+      const htmlGarage = `<li class="point">
+      <div class="name">${point.properties.supplierName}</div>
+      <div class="capacity">${serviceText}</div>
+      <div class="state ${
+        point.properties.open24x7 == true ? "open" : "close"
+      }">${point.properties.open24x7 == true ? "open" : "closed"}</div>
+      <div class="distance">Distance: <span class="km">${Math.floor(
+        Math.random() * (200 - 10) + 10
+      )}km</span></div>
+      <div class="location">${point.properties.address.country}, ${
+        point.properties.address.city
+      }</div>
+      <div class="options"><span class="two"><img width="25px" src="${
+        point.properties.wheller.two == true ? "./img/bycicle.png" : ""
+      }" alt=""> </span><span class="four"><img height="25px" src="${
+        point.properties.wheller.four == true ? "./img/electric-car.png" : ""
+      }" alt=""></span></div>
+      <div class="phone"><a href="tel:${point.properties.phone}">${
+        point.properties.phone
+      }</a></div>
+    </li>`;
+
+      const htmlEV = `<li class="point">
                       <div class="name">${point.properties.supplierName}</div>
-                      <div class="capacity">tottal <span class="tottal">:${
-                        point.properties.tottalPort
-                      }</span> available <span class="aval">:${
-        point.properties.availablePort
-      }</span></div>
+                      <div class="capacity">${serviceText}</div>
                       <div class="state ${
                         point.properties.open24x7 == true ? "open" : "close"
                       }">${
         point.properties.open24x7 == true ? "open" : "closed"
       }</div>
-                      <div class="closing_time">closing time <span class="time">${
-                        point.properties.open24x7 == true
-                          ? ": 24x7 service"
-                          : point.properties.closingTime
-                      }</span></div>
-                      <div class="distance">Distance <span class="km">${"10"}km</span></div>
+                      <div class="distance">Distance <span class="km">${Math.floor(
+                        Math.random() * (200 - 10) + 10
+                      )}km</span></div>
                       <div class="location">${
                         point.properties.address.country
                       }, ${point.properties.address.city}</div>
@@ -194,8 +213,14 @@ class App {
                       }" alt=""> </span><span class="four"><img height="25px" src="${
         point.properties.wheller.four == true ? "./img/electric-car.png" : ""
       }" alt=""></span></div>
+      <div class="phone"><a href="tel:${point.properties.phone}">${
+        point.properties.phone
+      }</a></div>
                     </li>`;
-      pointsContainer.insertAdjacentHTML("beforeend", html);
+      pointsContainer.insertAdjacentHTML(
+        "beforeend",
+        point.properties.pointType == "ev" ? htmlEV : htmlGarage
+      );
     });
   }
   _onEachFeature(point, layer) {

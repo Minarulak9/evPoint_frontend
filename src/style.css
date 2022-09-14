@@ -71,6 +71,7 @@ body{
     background-color: var(--red-pink);
     color: var(--white-color);
     letter-spacing: 3px;
+    text-decoration: none;
 }
 .btn:hover{
     opacity: .8;
