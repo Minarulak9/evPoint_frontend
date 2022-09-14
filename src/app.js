@@ -250,7 +250,7 @@ class App {
       <div class="p-phone">Phone: <a href="tel:${point.properties.phone}">${
       point.properties.phone
     }</a> </div>
-      <div class="p-distance">Distance:${"20km"}</div>
+      <div class="p-distance">Distance: ...</div>
       <div class="p-btns">
       <button class="p-details_btn p-btn">Deatils</button>
       <button class="p-direction_btn p-btn">Get direction</button>
@@ -266,7 +266,21 @@ class App {
         L.latLng(coords.latlng.lat, coords.latlng.lng),
       ],
     });
+    this.#routingLayer.on("routesfound", (e) => {
+      const route = e.routes[0].summary;
+      console.log(route);
+      document.querySelector('.p-distance').innerHTML = `Distance: ${this.convertMeterToKiloMeter(route.totalDistance)} Km, ${this.convertSecToMin(route.totalTime)} min(s)`;
+    });
+
     this.#routingLayer.addTo(this.#map);
+  }
+
+  convertMeterToKiloMeter(distance) {
+    return Math.round(distance / 1000 * 100) / 100;
+  }
+
+  convertSecToMin(seconds) {
+    return Math.round(seconds % 3600 / 60);
   }
 }
 const app = new App();
