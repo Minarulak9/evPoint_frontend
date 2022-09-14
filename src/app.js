@@ -124,7 +124,6 @@ class App {
   async _getNearestPoints() {
     let lat = this.#cordinates[1];
     let lng = this.#cordinates[0];
-    console.log(this.#cordinates);
     try {
       const response = await axios.get(
         `https://evpoint.herokuapp.com/points/evs/nearest/${lng}/${lat}`
@@ -176,9 +175,7 @@ class App {
       <div class="state ${
         point.properties.open24x7 == true ? "open" : "close"
       }">${point.properties.open24x7 == true ? "open" : "closed"}</div>
-      <div class="distance">Distance: <span class="km">${Math.floor(
-        Math.random() * (200 - 10) + 10
-      )}km</span></div>
+      <div class="distance">Distance: <span class="km">${"--"}km</span></div>
       <div class="location">${point.properties.address.country}, ${
         point.properties.address.city
       }</div>
@@ -200,9 +197,7 @@ class App {
                       }">${
         point.properties.open24x7 == true ? "open" : "closed"
       }</div>
-                      <div class="distance">Distance <span class="km">${Math.floor(
-                        Math.random() * (200 - 10) + 10
-                      )}km</span></div>
+                      <div class="distance">Distance <span class="km">${"--"}km</span></div>
                       <div class="location">${
                         point.properties.address.country
                       }, ${point.properties.address.city}</div>
