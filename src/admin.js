@@ -93,4 +93,5 @@ createBtn.addEventListener("click", () => {
 
 modalOkE.addEventListener("click", () => {
   modal.classList.add("hide");
+  modalOkE.classList.add("hide");
 });

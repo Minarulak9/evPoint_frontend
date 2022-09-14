@@ -17,7 +17,7 @@ class App {
   #cordinates;
   #routingLayer;
   constructor() {
-    this._getPosition();
+    this._getPosition.bind(this)();
     this._getCordinates.bind(this)();
     // listners
     locateMeBtn.addEventListener("click", () => {
@@ -29,7 +29,7 @@ class App {
       searchClr.classList.add("hide");
       searchInput.value = "";
     });
-    this._getPoints();
+    this._getPoints.bind(this)();
   }
   _getCordinates() {
     navigator.geolocation.getCurrentPosition(
