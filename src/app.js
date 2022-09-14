@@ -161,7 +161,7 @@ class App {
       }).on("click", this._makeDirection.bind(this));
       this.#pointsLayer.addTo(this.#map);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
   _genarateList(arr) {
