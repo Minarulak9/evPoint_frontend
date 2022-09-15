@@ -17,28 +17,19 @@ class App {
   #cordinates;
   #routingLayer;
   constructor() {
-    this._getPosition.bind(this)();
     this._getCordinates.bind(this)();
-    // listners
-    locateMeBtn.addEventListener("click", () => {
-      console.log(this.#cordinates);
-      this.#map.flyTo(this.#cordinates, 12, { duration: 1.2 });
-    });
-    searchClrBtn.addEventListener("click", () => {
-      this.#search?.remove();
-      searchClr.classList.add("hide");
-      searchInput.value = "";
-    });
-    this._getPoints.bind(this)();
   }
   _getCordinates() {
     navigator.geolocation.getCurrentPosition(
       (coords) => {
         this.#cordinates = [coords.coords.latitude, coords.coords.longitude];
+        this._getPosition.bind(this)();
         this._getNearestPoints.bind(this)();
       },
       () => {
+        this._getPosition.bind(this)();
         this.#cordinates = [22.941529740717435, 88.34692052708166];
+        this._getNearestPoints.bind(this)();
       }
     );
   }
@@ -73,6 +64,12 @@ class App {
     })
       .on("markgeocode", this._markSearch.bind(this))
       .addTo(this.#map);
+
+    this._getPoints.bind(this)();
+    // listners
+    locateMeBtn.addEventListener("click", () => {
+      this.#map.flyTo(this.#cordinates, 12, { duration: 1.2 });
+    });
   }
   async _locateUsingIp() {
     let res = await fetch("https://ipapi.co/json/");
@@ -107,6 +104,11 @@ class App {
       ".leaflet-control-geocoder-form input"
     );
     document.querySelector(".clear-search").classList.remove("hide");
+    searchClrBtn.addEventListener("click", () => {
+      this.#search?.remove();
+      searchClr.classList.add("hide");
+      searchInput.value = "";
+    });
   }
   markEvs(coords) {
     coords.forEach((c) => {
@@ -128,7 +130,6 @@ class App {
       const response = await axios.get(
         `https://evpoint.herokuapp.com/points/evs/nearest/${lng}/${lat}`
       );
-      console.log(response);
       this._genarateList.bind(this)(response.data.points);
     } catch (error) {
       console.log(error);
