@@ -117,7 +117,9 @@ class App {
   }
   _markSearch(e) {
     var bbox = e.geocode.bbox;
-    this.#search?.remove();
+    if (this.#search) {
+      this.#search.remove();
+    }
     this.#search = L.polygon([
       bbox.getSouthEast(),
       bbox.getNorthEast(),
@@ -291,7 +293,9 @@ class App {
     `;
   }
   _makeDirection(coords) {
-    this.#routingLayer?.remove();
+    if (this.#routingLayer) {
+      this.#routingLayer.remove();
+    }
     this.#routingLayer = L.Routing.control({
       waypoints: [
         L.latLng(this.#cordinates[0], this.#cordinates[1]),
