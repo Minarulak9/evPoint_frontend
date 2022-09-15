@@ -1,4 +1,5 @@
 const searchClr = document.querySelector(".clear-search");
+const routeClr = document.querySelector(".clear-route");
 const searchClrBtn = searchClr.querySelector("button");
 const locateMeBtn = document.querySelector(".locate button");
 const pointsContainer = document.querySelector(".points");
@@ -166,11 +167,16 @@ class App {
   }
   _genarateList(arr) {
     arr.forEach((point) => {
+      let liEv = document.createElement("li");
+      let liGarage = document.createElement("li");
+      liEv.classList.add("point");
+      liGarage.classList.add("point");
       let serviceText =
         point.properties.open24x7 == true
           ? "24x7 service"
           : `opening : ${point.properties.openTime} <br> closing: ${point.properties.closingTime} `;
-      const htmlGarage = `<li class="point">
+
+      const htmlGarage = `
       <div class="name">${point.properties.supplierName}</div>
       <div class="capacity">${serviceText}</div>
       <div class="state ${
@@ -188,9 +194,9 @@ class App {
       <div class="phone"><a href="tel:${point.properties.phone}">${
         point.properties.phone
       }</a></div>
-    </li>`;
+    `;
 
-      const htmlEV = `<li class="point">
+      const htmlEV = `
                       <div class="name">${point.properties.supplierName}</div>
                       <div class="capacity">${serviceText}</div>
                       <div class="state ${
@@ -212,10 +218,20 @@ class App {
       <div class="phone"><a href="tel:${point.properties.phone}">${
         point.properties.phone
       }</a></div>
-                    </li>`;
-      pointsContainer.insertAdjacentHTML(
+                    `;
+      liEv.innerHTML = htmlEV;
+      liGarage.innerHTML = htmlGarage;
+      let lat = point.geometry.coordinates[0];
+      let lng = point.geometry.coordinates[1];
+      liEv.addEventListener("click", () => {
+        this.#map.flyTo([lng, lat], 12, { duration: 1.2 });
+      });
+      liGarage.addEventListener("click", () => {
+        this.#map.flyTo([lng, lat], 12, { duration: 1.2 });
+      });
+      pointsContainer.insertAdjacentElement(
         "beforeend",
-        point.properties.pointType == "ev" ? htmlEV : htmlGarage
+        point.properties.pointType == "ev" ? liEv : liGarage
       );
     });
   }
@@ -246,7 +262,6 @@ class App {
     `;
   }
   _makeDirection(coords) {
-    console.log(coords.latlng);
     this.#routingLayer?.remove();
     this.#routingLayer = L.Routing.control({
       waypoints: [
@@ -255,6 +270,11 @@ class App {
       ],
     });
     this.#routingLayer.addTo(this.#map);
+    routeClr.classList.remove("hide");
+    routeClr.addEventListener("click", () => {
+      this.#routingLayer?.remove();
+      routeClr.classList.add("hide");
+    });
   }
 }
 const app = new App();
