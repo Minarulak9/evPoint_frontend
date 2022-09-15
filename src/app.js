@@ -136,7 +136,9 @@ class App {
     );
     document.querySelector(".clear-search").classList.remove("hide");
     searchClrBtn.addEventListener("click", () => {
-      this.#search?.remove();
+      if (this.#search) {
+        this.#search.remove();
+      }
       searchClr.classList.add("hide");
       searchInput.value = "";
     });
@@ -305,7 +307,9 @@ class App {
     this.#routingLayer.addTo(this.#map);
     routeClr.classList.remove("hide");
     routeClr.addEventListener("click", () => {
-      this.#routingLayer?.remove();
+      if (this.#routingLayer) {
+        this.#routingLayer.remove();
+      }
       routeClr.classList.add("hide");
     });
   }
