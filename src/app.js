@@ -2,6 +2,8 @@ const searchClr = document.querySelector(".clear-search");
 const routeClr = document.querySelector(".clear-route");
 const searchClrBtn = searchClr.querySelector("button");
 const locateMeBtn = document.querySelector(".locate button");
+const evFilter = document.querySelector(".ev-filter");
+const garageFilter = document.querySelector(".garage-filter");
 const pointsContainer = document.querySelector(".points");
 
 let getDirectionBtn;
@@ -26,6 +28,32 @@ class App {
         this.#cordinates = [coords.coords.latitude, coords.coords.longitude];
         this._getPosition.bind(this)();
         this._getNearestPoints.bind(this)();
+        evFilter.addEventListener("click", async () => {
+          console.log("mak");
+          let lat = this.#cordinates[1];
+          let lng = this.#cordinates[0];
+          try {
+            const response = await axios.get(
+              `https://evpoint.herokuapp.com/points/evs/nearest/ev/${lng}/${lat}`
+            );
+            this._genarateList.bind(this)(response.data.points);
+          } catch (error) {
+            console.log(error);
+          }
+        });
+        garageFilter.addEventListener("click", async () => {
+          console.log("mak");
+          let lat = this.#cordinates[1];
+          let lng = this.#cordinates[0];
+          try {
+            const response = await axios.get(
+              `https://evpoint.herokuapp.com/points/evs/nearest/g/${lng}/${lat}`
+            );
+            this._genarateList.bind(this)(response.data.points);
+          } catch (error) {
+            console.log(error);
+          }
+        });
       },
       () => {
         this._getPosition.bind(this)();
@@ -166,6 +194,7 @@ class App {
     }
   }
   _genarateList(arr) {
+    pointsContainer.innerHTML = "";
     arr.forEach((point) => {
       let liEv = document.createElement("li");
       let liGarage = document.createElement("li");
