@@ -187,6 +187,10 @@ body {
   box-shadow: none !important;
 }
 
+.point > .phone  a{
+  text-decoration: none;
+  color: orangered;
+}
 .point > div {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
