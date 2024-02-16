@@ -34,7 +34,7 @@ class App {
           let lng = this.#cordinates[0];
           try {
             const response = await axios.get(
-              `https://evpoint-042f1c768900.herokuapp.com/points/evs/nearest/ev/${lng}/${lat}`
+              `https://upset-coveralls-slug.cyclic.app/points/evs/nearest/ev/${lng}/${lat}`
             );
             this._genarateList.bind(this)(response.data.points);
           } catch (error) {
@@ -47,7 +47,7 @@ class App {
           let lng = this.#cordinates[0];
           try {
             const response = await axios.get(
-              `https://evpoint-042f1c768900.herokuapp.com/points/evs/nearest/g/${lng}/${lat}`
+              `https://upset-coveralls-slug.cyclic.app/points/evs/nearest/g/${lng}/${lat}`
             );
             this._genarateList.bind(this)(response.data.points);
           } catch (error) {
@@ -161,7 +161,7 @@ class App {
     let lng = this.#cordinates[0];
     try {
       const response = await axios.get(
-        `https://evpoint-042f1c768900.herokuapp.com/points/evs/nearest/${lng}/${lat}`
+        `https://upset-coveralls-slug.cyclic.app/points/evs/nearest/${lng}/${lat}`
       );
       this._genarateList.bind(this)(response.data.points);
     } catch (error) {
@@ -171,7 +171,7 @@ class App {
   async _getPoints() {
     try {
       const response = await axios.get(
-        "https://evpoint-042f1c768900.herokuapp.com/points/evs"
+        "https://upset-coveralls-slug.cyclic.app/points/evs"
       );
       this.#points = response.data.points;
       let evIcon = L.icon({
