@@ -75,7 +75,7 @@ createBtn.addEventListener("click", () => {
   modal.classList.remove("hide");
   console.log(data);
   axios
-    .post("https://upset-coveralls-slug.cyclic.app/points/evs", data)
+    .post("https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev", data)
     .then(function (response) {
       modalImg.src = "./img/verified.gif";
       modaltext.textContent = "Point created successfull.";
