@@ -34,7 +34,7 @@ class App {
           let lng = this.#cordinates[0];
           try {
             const response = await axios.get(
-              `https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev/nearest/ev/${lng}/${lat}`
+              `https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev/points/evs/nearest/ev/${lng}/${lat}`
             );
             this._genarateList.bind(this)(response.data.points);
           } catch (error) {
@@ -47,7 +47,7 @@ class App {
           let lng = this.#cordinates[0];
           try {
             const response = await axios.get(
-              `https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev/nearest/g/${lng}/${lat}`
+              `https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev/points/evs/nearest/g/${lng}/${lat}`
             );
             this._genarateList.bind(this)(response.data.points);
           } catch (error) {
@@ -161,7 +161,7 @@ class App {
     let lng = this.#cordinates[0];
     try {
       const response = await axios.get(
-        `https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev/nearest/${lng}/${lat}`
+        `https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev/points/evs/nearest/${lng}/${lat}`
       );
       this._genarateList.bind(this)(response.data.points);
     } catch (error) {
@@ -171,7 +171,7 @@ class App {
   async _getPoints() {
     try {
       const response = await axios.get(
-        "https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev"
+        "https://7873611d-80ff-4d8c-8d7a-c7bc86efe0c1.e1-us-east-azure.choreoapps.dev/points/evs"
       );
       this.#points = response.data.points;
       let evIcon = L.icon({
