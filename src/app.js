@@ -287,7 +287,7 @@ class App {
       <div class="p-phone">Phone: <a href="tel:${point.properties.phone}">${
       point.properties.phone
     }</a> </div>
-      <div class="p-distance">Distance:${"20km"}</div>
+      <div class="p-distance">Distance:${"--"}</div>
       <div class="p-btns">
       <button class="p-details_btn p-btn">Deatils</button>
       <button class="p-direction_btn p-btn">Get direction</button>
